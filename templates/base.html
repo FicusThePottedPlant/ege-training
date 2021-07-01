@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>{{ title }}</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+</head>
+<body>
+<nav id="navbar">
+    <ul>
+        <li style="background-color: #408643"><a href="/">Главное меню</a></li>
+        {% if current_user.is_authenticated %}
+            <li class="dropdown">
+
+                <a href="javascript:void(0)" class="dropbtn">{{ current_user.username }}</a>
+
+                <div class="dropdown-content">
+                    <a href="/id{{ current_user.id }}">Профиль</a>
+                    <a href="/settings">Настройки</a>
+                    <a href="/logout">Выйти</a>
+                </div>
+            </li>
+        {% else %}
+            <li class="action"><a href="/login">Войти</a></li>
+        {% endif %}
+    </ul>
+</nav>
+
+<section class="cards-wrapper">
+    <div class="card-grid-space">
+        <a class="card" href="/session/world"
+           style="--bg-img: url({{ url_for('static', filename='image/letter_o.png') }})">
+            <div>
+                <h1>Ударения</h1>
+                <p>Отработка ударений</p>
+            </div>
+        </a>
+    </div>
+    <div class="card-grid-space">
+        <a class="card" href="session/russia"
+           style="--bg-img: url({{ url_for('static', filename='russia.jpg') }})">
+            <div>
+                <h1>Паронимы</h1>
+                <p>Отработка употребления паронимов</p>
+            </div>
+        </a>
+    </div>
+    <div class="card-grid-space">
+        <a class="card" href="session/custom"
+           style="--bg-img: url({{ url_for('static', filename='near.jpg') }})">
+            <div>
+                <h1>Формы слова</h1>
+                <p>Отработка правописания форм слов</p>
+            </div>
+        </a>
+    </div>
+</section>
+
+</body>
+</html>

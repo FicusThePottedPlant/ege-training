@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ user.username }}</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+</head>
+<body>
+<nav id="navbar">
+    <ul>
+        <li><a href="/">Главное меню</a></li>
+        {% if current_user.is_authenticated %}
+            <li class="dropdown">
+
+                <a style="background-color: #408643" href="javascript:void(0)"
+                   class="dropbtn">{{ current_user.username }}</a>
+
+                <div class="dropdown-content">
+                    <a href="/id{{ current_user.id }}">Профиль</a>
+                    <a href="/settings">Настройки</a>
+                    <a href="/logout">Выйти</a>
+                </div>
+            </li>
+        {% else %}
+            <li class="action"><a href="/login">Войти</a></li>
+        {% endif %}
+    </ul>
+</nav>
+{% if user != 'Пользователь не найден' and user != 'Вы не можете пока ничего настроить' %}
+    <div class="profile">
+        <div class="basic">
+            <h1>{{ user.username }}</h1>
+            <p>ID: {{ user.id }}</p>
+        </div>
+        <div class="statistics">
+            <h1>Игровая статистика</h1>
+            <p>Всего очков: <span>{{ user.score }}</span></p>
+            <p>Всего сыграно: <span>{{ user.games_played }}</span></p>
+            <p>Лучший результат: <span>{{ user.max }}</span></p>
+            <p>Средний результат: <span>{{ user.medium }}</span></p>
+        </div>
+    </div>
+{% else %}
+    <div class="profile">
+        <div class="basic">
+            <h1>{{ user }}</h1>
+        </div>
+    </div>
+{% endif %}
+</body>
+</html>
