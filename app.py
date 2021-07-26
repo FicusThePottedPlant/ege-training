@@ -1,3 +1,4 @@
+import os
 from random import shuffle
 
 from flask import Flask, render_template, redirect, jsonify, make_response
