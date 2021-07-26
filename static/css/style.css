@@ -23,7 +23,6 @@
     list-style-type: none;
     margin: 0;
     padding: 0;
-    overflow: hidden;
     background-color: #333;
     display: flex;
 }
@@ -343,7 +342,7 @@
 @media all and (orientation: landscape) {
     .game {
         position: fixed;
-        height: 100vh;
+        height: 120vh;
         width: 100vw;
         z-index: 1;
     }
@@ -372,7 +371,7 @@
 
 #word {
     position: absolute;
-    top: 45%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     font-family: monospace;
