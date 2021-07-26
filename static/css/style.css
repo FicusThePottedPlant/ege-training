@@ -182,7 +182,7 @@
 
 .profile {
     width: 40vw;
-    min-width: 350px;
+    min-width: 200px;
     max-width: 1200px;
     min-height: 84vh;
     margin: 100px auto 0;
@@ -335,7 +335,7 @@
     }
 }
 
-.basic {
+.attention-info {
     text-align: center;
     transform: translate(-50%, -50%);
 }
