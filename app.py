@@ -117,4 +117,5 @@ accents = open('accent.txt', encoding='UTF_8').readlines()
 db_session.global_init("db/web_project.db")
 db_sess = db_session.create_session()
 if __name__ == '__main__':
-    app.run()
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
