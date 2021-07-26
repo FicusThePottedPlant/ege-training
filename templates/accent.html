@@ -7,7 +7,12 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
     <script src="{{ url_for('static', filename='js/accent.js') }}"></script>
-    <script> initParams({{ coordinates }}, {{score_c}}) </script>
+    <script> let words = {{ accents | safe }};
+    setTimeout(() => {
+        setWord(words[gameIndex]);
+    }, 100)
+
+    </script>
 </head>
 <body>
 <nav id="navbar">
@@ -16,7 +21,7 @@
         {% if current_user.is_authenticated %}
             <li class="dropdown">
 
-                <a href="javascript:void(0)" class="dropbtn">{{ current_user.username }}</a>
+                <a href="" class="dropbtn">{{ current_user.username }}</a>
 
                 <div class="dropdown-content">
                     <a href="/id{{ current_user.id }}">Профиль</a>
@@ -27,11 +32,17 @@
         {% else %}
             <li class="action"><a href="/login">Войти</a></li>
         {% endif %}
+        <li><a style="pointer-events: none" id="lap">1/20</a></li>
     </ul>
 </nav>
 <div class="game">
-    <span class="word">hello</span>
-
+    <div class="info"><span style="color:green" id="truth">0</span>:<span style="color:red" id="untruth">0</span></div>
+    <div id="word"></div>
+</div>
+<div class="attention">
+    <div class="basic">
+        <h1>Пожалуйста установите экран в альбомную ориентацию</h1>
+    </div>
 </div>
 
 </body>

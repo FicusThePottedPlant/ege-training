@@ -1,18 +1,23 @@
-from random import choice
+from random import shuffle
 
-from flask import Flask, render_template, request, redirect, jsonify, make_response
-from flask_login import LoginManager, login_required, logout_user, current_user, login_user
+from flask import Flask, render_template, redirect, jsonify, make_response
+from flask_login import LoginManager, logout_user, current_user, login_user
 from sqlalchemy import exc
 
 from data import db_session
 from data.user import User
 from forms.login_form import LoginForm
 from forms.signup_form import AuthorizeForm
+from flask_ngrok import run_with_ngrok
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '38bb5726c679e925be0d38b4f15502eb'
 login_manager = LoginManager()
 login_manager.init_app(app)
+
+TEST_VAR_TO_RUN_NGROK = 0
+if TEST_VAR_TO_RUN_NGROK:
+    run_with_ngrok(app)
 
 
 @login_manager.user_loader
@@ -24,13 +29,14 @@ def load_user(user_id):
 
 
 def get_random_words(n):
-    for i in range(n):
-        yield choice(accents).rstrip()
+    shuffle(accents)
+    return accents[:n]
 
 
-@app.route('/session/<string:game_type>', methods=['GET', 'POST'])
-def play(game_type):
-    return render_template('accent.html', accents=list(get_random_words(20)))
+@app.route('/accents')
+def play():
+    print(get_random_words(20))
+    return render_template('accent.html', accents=get_random_words(20))
 
 
 @app.route('/login', methods=['GET', 'POST'])
