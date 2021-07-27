@@ -2,6 +2,7 @@ let gameIndex = 0
 let vowels = 'аоэеиыуёюя'
 let truth = 0
 let untruth = 0
+let mistakes = []
 
 function setWord(word) {
     let formattedWord = ''
@@ -29,19 +30,21 @@ function addNum(el) {
         truth++
     } else {
         untruth++
-
+        document.querySelector('#attention-info ul').appendChild(document.createElement('li')).innerHTML = words[gameIndex]
     }
 
     setTimeout(() => {
+        if (gameIndex === words.length - 1) {
+            document.getElementById('attention-info').style.display = 'block'
+            document.getElementById('game').style.display = 'none'
 
-        gameIndex++
-        document.getElementById("lap").innerHTML = (gameIndex + 1) + '/' + words.length
-        document.getElementById("truth").innerHTML = truth
-        document.getElementById("untruth").innerHTML = untruth
-        if (gameIndex === words.length) {
-            document.location = "/"
         } else {
+            gameIndex++
             setWord(words[gameIndex])
+            document.getElementById("lap").innerHTML = (gameIndex + 1) + '/' + words.length
+            document.getElementById("truth").innerHTML = truth
+            document.getElementById("untruth").innerHTML = untruth
+
         }
     }, 100)
 
