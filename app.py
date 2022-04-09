@@ -4,7 +4,6 @@ from random import shuffle
 from flask import Flask, render_template, redirect, jsonify, make_response
 from flask_login import LoginManager, logout_user, current_user, login_user
 from sqlalchemy import exc
-
 from data import db_session
 from data.user import User
 from forms.login_form import LoginForm
